@@ -1,0 +1,26 @@
+module row_col_decoder(input [1:0] r,input [1:0] c,output [8:0] o); 
+    wire [1:0] r_bar;
+    wire [1:0] c_bar;
+    not(r_bar[0],r[0]);
+    not(r_bar[1],r[1]);
+    not(c_bar[0],c[0]);
+    not(c_bar[1],c[1]);
+    and(r1c1,c_bar[1],c[0],r_bar[1],r[0]);
+    buf(o[0],r1c1);
+    and(r1c2,c[1],c_bar[0],r_bar[1],r[0]);
+    buf(o[1],r1c2);
+    and(r1c3,c[1],c[0],r_bar[1],r[0]);
+    buf(o[2],r1c3);
+    and(r2c1,c_bar[1],c[0],r[1],r_bar[0]);
+    buf(o[3],r2c1);
+    and(r2c2,c[1],c_bar[0],r[1],r_bar[0]);
+    buf(o[4],r2c2);
+    and(r2c3,c[1],c[0],r[1],r_bar[0]);
+    buf(o[5],r2c3);
+    and(r3c1,c_bar[1],c[0],r[1],r[0]);
+    buf(o[6],r3c1);
+    and(r3c2,c[1],c_bar[0],r[1],r[0]);
+    buf(o[7],r3c2);
+    and(r3c3,c[1],c[0],r[1],r[0]);
+    buf(o[8],r3c3);
+endmodule

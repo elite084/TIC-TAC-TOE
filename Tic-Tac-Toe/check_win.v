@@ -1,0 +1,28 @@
+module check(input [8:0] symbol,input [8:0] valid,output [1:0] win);
+    and(v1,valid[0],valid[1],valid[2]);
+    and(v2,valid[3],valid[4],valid[5]);
+    and(v3,valid[6],valid[7],valid[8]);
+    and(v4,valid[0],valid[3],valid[6]);
+    and(v5,valid[1],valid[4],valid[7]);
+    and(v6,valid[2],valid[5],valid[8]);
+    and(v7,valid[0],valid[4],valid[8]);
+    and(v8,valid[2],valid[4],valid[6]);
+    and(win1,v1,symbol[0],symbol[1],symbol[2]); 
+    and(win2,v2,symbol[3],symbol[4],symbol[5]);  
+    and(win3,v3,symbol[6],symbol[7],symbol[8]);  
+    and(win4,v4,symbol[0],symbol[3],symbol[6]);  
+    and(win5,v5,symbol[1],symbol[4],symbol[7]);  
+    and(win6,v6,symbol[2],symbol[5],symbol[8]);
+    and(win7,v7,symbol[0],symbol[4],symbol[8]);
+    and(win8,v8,symbol[2],symbol[4],symbol[6]);
+    or(win[0],win1,win2,win3,win4,win5,win6,win7,win8);
+    nor(r1,~v1,symbol[0],symbol[1],symbol[2]);
+    nor(r2,~v2,symbol[3],symbol[4],symbol[5]);
+    nor(r3,~v3,symbol[6],symbol[7],symbol[8]);
+    nor(r4,~v4,symbol[0],symbol[3],symbol[6]);
+    nor(r5,~v5,symbol[1],symbol[4],symbol[7]);  
+    nor(r6,~v6,symbol[2],symbol[5],symbol[8]);
+    nor(r7,~v7,symbol[0],symbol[4],symbol[8]);
+    nor(r8,~v8,symbol[2],symbol[4],symbol[6]);
+    or(win[1],r1,r2,r3,r4,r5,r6,r7,r8);
+endmodule
